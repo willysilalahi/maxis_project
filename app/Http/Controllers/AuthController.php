@@ -19,13 +19,14 @@ class AuthController extends Controller
             'password'  => 'required'
         ]);
 
-        if(Auth::attempt($request->only('email', 'password'))){
+        if (Auth::attempt($request->only('email', 'password'))) {
             return redirect('/dashboard');
         }
         return redirect('/login');
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect('/login');
     }

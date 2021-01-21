@@ -8,31 +8,35 @@ use Illuminate\Http\Request;
 
 class SiswaController extends Controller
 {
-    
-    function index(){
 
-        $siswa = SiswaModel::all();
+    function index()
+    {
+
+        $siswa = SiswaModel::latest()->get();
         return view('siswa/index', compact('siswa'));
     }
 
-    function addSiswa(SiswaRequest $request){
+    function addSiswa(SiswaRequest $request)
+    {
         SiswaModel::create([
             'nama_depan'       => request('nama_depan'),
             'nama_belakang'    => request('nama_belakang'),
             'jenis_kelamin'    => request('jenis_kelamin'),
             'agama'            => request('agama'),
-            'alamat'           => request('alamat')     ,
+            'alamat'           => request('alamat'),
         ]);
     }
-    
 
-    function editSiswa($id){
+
+    function editSiswa($id)
+    {
         $siswa = SiswaModel::findOrFail($id);
         return view('siswa.edit_siswa', compact('siswa'));
     }
 
-    
-    function updateSiswa(SiswaRequest $request, $id){
+
+    function updateSiswa(SiswaRequest $request, $id)
+    {
         $data_siswa = [
             'nama_depan'    => request('nama_depan'),
             'nama_belakang'    => request('nama_belakang'),
@@ -44,7 +48,8 @@ class SiswaController extends Controller
         SiswaModel::whereId($id)->update($data_siswa);
     }
 
-    function deleteSiswa($id){
+    function deleteSiswa($id)
+    {
         $siswa = SiswaModel::findOrFail($id);
         $siswa->delete();
     }

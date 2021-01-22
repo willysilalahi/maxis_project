@@ -1,13 +1,14 @@
 @extends('templates.main')
-@section('title', 'Siswa')
-@section('header', 'Data Siswa')
+@section('title', 'Guru')
+@section('header', 'Data Guru')
 @section('content')
-    <a href="#" class="btn btn-info my-3" id="showModalAddSiswa">Tambah
-        Siswa</a>
+    <a href="#" class="btn btn-info my-3" id="showModalAddGuru">Tambah
+        Guru</a>
     <table class="display" style="width:100%" id="dataSiswa">
         <thead class="thead-dark">
             <tr>
                 <th>No</th>
+                <th>Photo</th>
                 <th>Nama Lengkap</th>
                 <th>Jenis Kelamin</th>
                 <th>Agama</th>
@@ -19,13 +20,14 @@
             @foreach ($guru as $s => $i)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
+                    <td><img src="{{ asset('uploads/guru/' . $i->photo) }}" class="img-fluid img-thumbnail" width="80"></td>
                     <td>{{ $i->nama }}</td>
                     <td>{{ $i->jk }}</td>
                     <td>{{ $i->agama }}</td>
                     <td>{{ $i->alamat }}</td>
                     <td>
-                        <a href="#" data-id="{{ $i->id }}" class="btn btn-sm btn-success showModalEditSiswa">Edit</a>
-                        <a href="#" data-id="{{ $i->id }}" class="btn btn-sm btn-danger btnDeleteSiswa">Delete</a>
+                        <a href="#" data-id="{{ $i->id }}" class="btn btn-sm btn-success showModalEditGuru">Edit</a>
+                        <a href="#" data-id="{{ $i->id }}" class="btn btn-sm btn-danger btnDeleteGuru">Delete</a>
                     </td>
                 </tr>
             @endforeach
@@ -37,31 +39,47 @@
 @endsection
 @section('addlist')
     <!-- Modal -->
-    <div class="modal fade" id="modalAddSiswa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalAddGuru" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Siswa</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Guru</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="javascript:void(0)" id="formAddSiswa">
+                <form action="javascript:void(0)" id="formAddGuru">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Nama Depan</label>
-                                    <input type="text" class="form-control" name="nama_depan">
-                                    <small class="form-text text-danger" id="nama_depanError"></small>
+                                    <label for="">Nama</label>
+                                    <input type="text" class="form-control" name="nama">
+                                    <small class="form-text text-danger" id="namaError"></small>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Nama Belakang</label>
-                                    <input type="text" class="form-control" name="nama_belakang">
-                                    <small class="form-text text-danger" id="nama_belakangError"></small>
+                                    <label for="">Email</label>
+                                    <input type="text" class="form-control" name="email">
+                                    <small class="form-text text-danger" id="emailError"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Tempat Lahir</label>
+                                    <input type="text" class="form-control" name="tempat_lahir">
+                                    <small class="form-text text-danger" id="tempat_lahirError"></small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Tanggal Lahir</label>
+                                    <input type="date" class="form-control" name="tanggal_lahir">
+                                    <small class="form-text text-danger" id="tanggal_lahirError"></small>
                                 </div>
                             </div>
                         </div>
@@ -69,12 +87,12 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Jenis Kelamin</label>
-                                    <select name="jenis_kelamin" id="" class="form-control">
+                                    <select name="jk" id="" class="form-control">
                                         <option value="#" selected disabled>--Pilih Jenis Kelamin--</option>
                                         <option value="Laki-laki">Laki-laki</option>
                                         <option value="Perempuan">Perempuan</option>
                                     </select>
-                                    <small class="form-text text-danger" id="jenis_kelaminError"></small>
+                                    <small class="form-text text-danger" id="jkError"></small>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -95,6 +113,22 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label for="">Photo</label><br>
+                                    <input type="file" name="photo"> <br>
+                                    <small class="form-text text-danger" id="photoError"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Handphone</label>
+                                    <input type="text" class="form-control" name="handphone">
+                                    <small class="form-text text-danger" id="handphoneError"></small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label for="">Alamat</label>
                                     <textarea name="alamat" cols="30" rows="5" class="form-control"></textarea>
                                     <small class="form-text text-danger" id="alamatError"></small>
@@ -103,29 +137,29 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-info" id="btnAddSiswa">Tambah</button>
+                        <button type="button" class="btn btn-info" id="btnAddGuru">Tambah</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="modalEditSiswa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalEditGuru" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Siswa</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Guru</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="javascript:void(0)" id="formEditSiswa">
+                <form action="javascript:void(0)" id="formEditGuru">
                     @csrf
                     <div class="modal-body">
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-info" id="btnUpdateSiswa">Simpan</button>
+                        <button type="button" class="btn btn-info" id="btnUpdateGuru">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -138,7 +172,7 @@
         $.fn.dataTable.ext.classes.sPageButton = 'btn btn-sm btn-primary ml-1';
 
         $(document).ready(function() {
-            $('#dataSiswa').DataTable({
+            $('#dataGuru').DataTable({
                 dom: 'Bfrtip',
                 buttons: [{
                         extend: 'excelHtml5',
@@ -163,29 +197,31 @@
         });
 
 
-        $('#showModalAddSiswa').on('click', function() {
-            $('#modalAddSiswa').modal('show');
+        $('#showModalAddGuru').on('click', function() {
+            $('#modalAddGuru').modal('show');
         });
 
-        $('#btnAddSiswa').on('click', function() {
-            let formData = $('#formAddSiswa').serialize();
+        $('#btnAddGuru').on('click', function() {
+            let formData = $('#formAddGuru').serialize();
 
-            $('#nama_depanError').addClass('d-none');
-            $('#nama_belakangError').addClass('d-none');
-            $('#jenis_kelaminError').addClass('d-none');
+            $('#namaError').addClass('d-none');
+            $('#emailError').addClass('d-none');
+            $('#tempat_lahirError').addClass('d-none');
+            $('#tanggal_lahirError').addClass('d-none');
+            $('#jkError').addClass('d-none');
             $('#agamaError').addClass('d-none');
             $('#alamatError').addClass('d-none');
 
 
 
             $.ajax({
-                url: "siswa",
+                url: "guru",
                 method: 'POST',
                 data: formData,
                 success: function(data) {
-                    swal("Sukses", "Data siswa berhasil ditambahkan!", "success");
+                    swal("Sukses", "Data guru berhasil ditambahkan!", "success");
                     setTimeout(function() {
-                        window.location.assign('siswa');
+                        window.location.assign('guru');
                     }, 1500);
                 },
                 error: function(data) {
@@ -202,16 +238,16 @@
         });
 
 
-        $('.showModalEditSiswa').on('click', function() {
+        $('.showModalEditGuru').on('click', function() {
             let id = $(this).data('id');
 
 
             $.ajax({
-                url: `siswa/${id}/edit`,
+                url: `guru/${id}/edit`,
                 method: 'GET',
                 success: function(data) {
-                    $('#modalEditSiswa').find('.modal-body').html(data)
-                    $('#modalEditSiswa').modal('show');
+                    $('#modalEditGuru').find('.modal-body').html(data)
+                    $('#modalEditGuru').modal('show');
                 },
                 error: function(error) {
                     alert('Terjadi kesalahan!')
@@ -221,19 +257,19 @@
         });
 
 
-        $('#btnUpdateSiswa').on('click', function() {
-            let id = $('#modalEditSiswa').find('#idSiswa').val();
-            let formData = $('#formEditSiswa').serialize();
+        $('#btnUpdateGuru').on('click', function() {
+            let id = $('#modalEditGuru').find('#idGuru').val();
+            let formData = $('#formEditGuru').serialize();
 
             $.ajax({
-                url: `siswa/${id}`,
+                url: `guru/${id}`,
                 method: 'PATCH',
                 data: formData,
                 success: function(data) {
-                    $('#modalEditSiswa').modal('hide');
+                    $('#modalEditGuru').modal('hide');
                     swal("Sukses", "Data siswa berhasil diedit!", "success");
                     setTimeout(function() {
-                        window.location.assign('siswa');
+                        window.location.assign('guru');
                     }, 1500);
                 },
                 error: function(data) {
@@ -250,10 +286,10 @@
         });
 
 
-        $('.btnDeleteSiswa').on('click', function() {
+        $('.btnDeleteGuru').on('click', function() {
             swal({
                     title: "Apakah anda yakin?",
-                    text: "Setelah dihapus, anda tidak akan dapat mengembalikan siswa ini!",
+                    text: "Setelah dihapus, anda tidak akan dapat mengembalikan siswa  ini!",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -265,20 +301,20 @@
 
 
                         $.ajax({
-                            url: `siswa/${id}`,
+                            url: `guru/${id}`,
                             method: 'DELETE',
                             data: {
                                 _token: CSRF_TOKEN
                             },
                             success: function(data) {
-                                swal("Sukses", "Data siswa berhasil dihapus!", "success");
+                                swal("Sukses", "Data guru berhasil dihapus!", "success");
                                 // iziToast.success({
                                 //     title: 'Sukses',
                                 //     message: 'Data tag berhasil dihapus!',
                                 // });
 
                                 setTimeout(function() {
-                                    window.location.assign('siswa');
+                                    window.location.assign('guru');
                                 }, 1500);
                             },
                             error: function(error) {
@@ -286,7 +322,7 @@
                             }
                         })
                     } else {
-                        swal("Siswa batal dihapus.");
+                        swal("Guru batal dihapus.");
                     }
                 });
         });

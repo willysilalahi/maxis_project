@@ -36,9 +36,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::prefix('guru')->group(function () {
         Route::get('/', 'GuruController@index')->name('guru.index');
-        // Route::post('/', 'SiswaController@addSiswa')->name('siswa.addSiswa');
-        // Route::get('/{id}/edit', 'SiswaController@editSiswa')->name('siswa.editSiswa');
-        // Route::patch('/{id}', 'SiswaController@updateSiswa')->name('siswa.updateSiswa');
-        // Route::delete('/{id}', 'SiswaController@deleteSiswa')->name('siswa.deleteSiswa');
+        Route::post('/', 'GuruController@addSiswa')->name('guru.addGuru');
+        Route::get('/{id}/edit', 'GuruController@editSiswa')->name('guru.editGuru');
+        Route::patch('/{id}', 'GuruController@updateSiswa')->name('guru.updateGuru');
+        Route::delete('/{id}', 'GuruController@deleteSiswa')->name('guru.deleteGuru');
     });
 });

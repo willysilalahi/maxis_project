@@ -1,17 +1,33 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            <label for="">Nama Depan</label>
-            <input type="hidden" id="idSiswa" value="{{ $siswa->id }}">
-            <input type="text" class="form-control" name="nama_depan" value="{{ $siswa->nama_depan }}">
-            <small class="form-text text-danger" id="nama_depanErr"></small>
+            <label for="">Nama</label>
+            <input type="hidden" id="idGuru" value="{{ $guru->id }}">
+            <input type="text" class="form-control" name="nama" value="{{ $guru->nama }}">
+            <small class="form-text text-danger" id="namaErr"></small>
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <label for="">Nama Belakang</label>
-            <input type="text" class="form-control" name="nama_belakang" value="{{ $siswa->nama_belakang }}">
-            <small class="form-text text-danger" id="nama_belakangErr"></small>
+            <label for="">Email</label>
+            <input type="text" class="form-control" name="email" value="{{ $guru->email }}">
+            <small class="form-text text-danger" id="emailErr"></small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="">Tempat Lahir</label>
+            <input type="text" class="form-control" name="tempat_lahir" value="{{ $guru->nama }}">
+            <small class="form-text text-danger" id="tempat_lahirErr"></small>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="">Tanggal Lahir</label>
+            <input type="text" class="form-control" name="tanggal_lahir" value="{{ $guru->email }}">
+            <small class="form-text text-danger" id="tanggal_lahirErr"></small>
         </div>
     </div>
 </div>
@@ -19,19 +35,19 @@
     <div class="col-md-6">
         <div class="form-group">
             <label for="">Jenis Kelamin</label>
-            <select name="jenis_kelamin" id="" class="form-control">
-                <option value="{{ $siswa->jenis_kelamin }}">{{ $siswa->jenis_kelamin }}</option>
+            <select name="jk" id="" class="form-control">
+                <option value="{{ $guru->jk }}">{{ $guru->jk }}</option>
                 <option value="Laki-laki">Laki-laki</option>
                 <option value="Perempuan">Perempuan</option>
             </select>
-            <small class="form-text text-danger" id="jenis_kelaminErr"></small>
+            <small class="form-text text-danger" id="jkErr"></small>
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
             <label for="">Agama</label>
             <select name="agama" id="" class="form-control">
-                <option value="{{ $siswa->agama }}">{{ $siswa->agama }}</option>
+                <option value="{{ $guru->agama }}">{{ $guru->agama }}</option>
                 <option value="Islam">Islam</option>
                 <option value="Kristen">Kristen</option>
                 <option value="Hindu">Hindu</option>
@@ -45,8 +61,25 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
+            <label for="">Photo</label><br>
+            <img src="{{ asset('uploads/guru/' . $guru->photo) }}" class="img-fluid img-thumbnail" width="80">
+            <input type="file" name="photo"> <br>
+            <small class="form-text text-danger" id="photoErr"></small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="">Handphone</label>
+            <input type="text" class="form-control" name="handphone" value="{{ $guru->handphone }}">
+            <small class="form-text text-danger" id="handphoneErr"></small>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
             <label for="">Alamat</label>
-            <textarea name="alamat" cols="30" rows="5" class="form-control">{{ $siswa->alamat }}</textarea>
+            <textarea name="alamat" cols="30" rows="5" class="form-control">{{ $guru->alamat }}</textarea>
             <small class="form-text text-danger" id="alamatErr"></small>
         </div>
     </div>

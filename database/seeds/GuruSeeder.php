@@ -20,6 +20,7 @@ class GuruSeeder extends Seeder
             'tempat_lahir' => 'Perlak',
             'tanggal_lahir' => '1992-02-09',
             'agama' => 'Islam',
+            'photo' => 'default.png',
             'handphone' => '08126678891',
             'alamat'    => 'Jl. Mandong Lubis, No.431, Kota Medan'
         ]);
@@ -30,6 +31,7 @@ class GuruSeeder extends Seeder
             'tempat_lahir' => 'Daun Pisang',
             'tanggal_lahir' => '1992-12-03',
             'agama' => 'Islam',
+            'photo' => 'default.png',
             'handphone' => '08126678891',
             'alamat'    => 'Jl. Mandong Lubis, No.431, Kota Medan'
         ]);
@@ -40,6 +42,7 @@ class GuruSeeder extends Seeder
             'tempat_lahir' => 'Cover Bed',
             'tanggal_lahir' => '1992-01-11',
             'agama' => 'Budha',
+            'photo' => 'default.png',
             'handphone' => '08126678891',
             'alamat'    => 'Jl. Mandong Lubis, No.431, Kota Medan'
         ]);

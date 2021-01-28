@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\GuruModel;
+use App\Http\Requests\GuruRequest;
+use App\Http\Requests\GuruEditRequest;
 use Illuminate\Http\Request;
 
 class GuruController extends Controller
@@ -15,35 +17,62 @@ class GuruController extends Controller
 
     function addGuru(GuruRequest $request)
     {
+        $photo = request('photo');
+        $photo_new = time() . '-' . uniqid() . '.' .  $photo->extension();
+        
         GuruModel::create([
             'nama'       => request('nama'),
             'email'    => request('email'),
+            'jk'    => request('jk'),
             'tempat_lahir'    => request('tempat_lahir'),
             'tanggal_lahir'    => request('tanggal_lahir'),
             'agama'            => request('agama'),
-            'photo'            => request('photo'),
+            'photo'            => $photo_new,
             'handphone'            => request('handphone'),
             'alamat'           => request('alamat'),
         ]);
+        $photo->move('uploads/guru/', $photo_new);
     }
 
 
     function editGuru($id)
     {
         $guru = GuruModel::findOrFail($id);
-        return view('guru.edit_guru', compact('Guru'));
+        return view('guru.edit_guru', compact('guru'));
     }
 
 
-    function updateGuru(GuruRequest $request, $id)
+    function updateGuru(GuruEditRequest $request, $id)
     {
-        $data_guru = [
-            'nama_depan'    => request('nama_depan'),
-            'nama_belakang'    => request('nama_belakang'),
-            'jenis_kelamin'    => request('jenis_kelamin'),
-            'agama'    => request('agama'),
-            'alamat'    => request('alamat')
-        ];
+        if(request('photo') !== null){
+            $photo = request('photo');
+            $photo_new = time() . '-' . uniqid() . '.' .  $photo->extension();
+            
+            $data_guru = [
+                'nama'       => request('nama'),
+                'email'    => request('email'),
+                'jk'    => request('jk'),
+                'tempat_lahir'    => request('tempat_lahir'),
+                'tanggal_lahir'    => request('tanggal_lahir'),
+                'agama'            => request('agama'),
+                'photo'            => $photo_new,
+                'handphone'            => request('handphone'),
+                'alamat'           => request('alamat'),
+            ];
+
+            $photo->move('uploads/guru/', $photo_new);
+        }else{
+            $data_guru = [
+                'nama'       => request('nama'),
+                'email'    => request('email'),
+                'jk'    => request('jk'),
+                'tempat_lahir'    => request('tempat_lahir'),
+                'tanggal_lahir'    => request('tanggal_lahir'),
+                'agama'            => request('agama'),
+                'handphone'            => request('handphone'),
+                'alamat'           => request('alamat'),
+            ];
+        }
 
         GuruModel::whereId($id)->update($data_guru);
     }

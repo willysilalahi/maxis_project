@@ -48,7 +48,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="javascript:void(0)" id="formAddGuru">
+                <form action="javascript:void(0)" id="formAddGuru" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -155,6 +155,7 @@
                 </div>
                 <form action="javascript:void(0)" id="formEditGuru">
                     @csrf
+                    @method('patch')
                     <div class="modal-body">
 
                     </div>
@@ -202,13 +203,14 @@
         });
 
         $('#btnAddGuru').on('click', function() {
-            let formData = $('#formAddGuru').serialize();
+            var formData = new FormData(document.getElementById("formAddGuru"));
 
             $('#namaError').addClass('d-none');
             $('#emailError').addClass('d-none');
             $('#tempat_lahirError').addClass('d-none');
             $('#tanggal_lahirError').addClass('d-none');
             $('#jkError').addClass('d-none');
+            $('#handphoneError').addClass('d-none');
             $('#agamaError').addClass('d-none');
             $('#alamatError').addClass('d-none');
 
@@ -233,7 +235,9 @@
                             $(ErrorId).text(value)
                         })
                     }
-                }
+                },
+                processData: false,
+                contentType: false,
             })
         });
 
@@ -259,11 +263,11 @@
 
         $('#btnUpdateGuru').on('click', function() {
             let id = $('#modalEditGuru').find('#idGuru').val();
-            let formData = $('#formEditGuru').serialize();
+            var formData = new FormData(document.getElementById("formEditGuru"));
 
             $.ajax({
                 url: `guru/${id}`,
-                method: 'PATCH',
+                method: 'POST',
                 data: formData,
                 success: function(data) {
                     $('#modalEditGuru').modal('hide');
@@ -281,7 +285,9 @@
                             $(ErrorId).text(value)
                         })
                     }
-                }
+                },
+                processData: false,
+                contentType: false,
             })
         });
 
@@ -307,15 +313,22 @@
                                 _token: CSRF_TOKEN
                             },
                             success: function(data) {
-                                swal("Sukses", "Data guru berhasil dihapus!", "success");
-                                // iziToast.success({
-                                //     title: 'Sukses',
-                                //     message: 'Data tag berhasil dihapus!',
-                                // });
-
+                                //swal("Sukses", "Data guru berhasil dihapus!", "success");
+                                mdtoast('Data Guru berhasil dihapus.', {
+                                    interaction: true,
+                                    actionText: 'OK',
+                                    action: function() {
+                                        this.hide();
+                                    }
+                                });
                                 setTimeout(function() {
                                     window.location.assign('guru');
                                 }, 1500);
+                                // mdtoast('This is an info toast.', {
+                                //     type: 'info'
+                                // });
+
+
                             },
                             error: function(error) {
                                 alert('Terjadi kesalahan');

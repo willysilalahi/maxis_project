@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GuruRequest extends FormRequest
+class GuruEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,7 +30,6 @@ class GuruRequest extends FormRequest
             'tanggal_lahir' => 'required',
             'jk' => 'required',
             'agama'  => 'required',
-            'photo'  => 'required',
             'handphone'  => 'required',
             'alamat'  => 'required'
         ];
@@ -45,7 +44,6 @@ class GuruRequest extends FormRequest
             'tanggal_lahir.required' => 'Silahkan isi tanggal lahir',
             'jk.required' => 'Silahkan pilih jenis kelamin',
             'agama.required' => 'Silahkan pilih agama',
-            'photo.required' => 'Silahkan pilih photo',
             'handphone.required' => 'Silahkan isi no handphone',
             'alamat.required' => 'Silahkan isi alamat',
         ];

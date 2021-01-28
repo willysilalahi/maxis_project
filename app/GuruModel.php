@@ -15,6 +15,7 @@ class GuruModel extends Model
         'tempat_lahir',
         'tanggal_lahir',
         'agama',
+        'photo',
         'handphone',
         'alamat'
     ];

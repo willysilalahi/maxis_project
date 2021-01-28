@@ -35,6 +35,7 @@
 <!-- Template JS File -->
 <script src="../assets/js/scripts.js"></script>
 <script src="../assets/js/custom.js"></script>
+<script src="../plugins/material-toast/mdtoast.min.js"></script>
 
 @yield('script')
 

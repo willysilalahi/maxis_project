@@ -19,14 +19,14 @@
     <div class="col-md-6">
         <div class="form-group">
             <label for="">Tempat Lahir</label>
-            <input type="text" class="form-control" name="tempat_lahir" value="{{ $guru->nama }}">
+            <input type="text" class="form-control" name="tempat_lahir" value="{{ $guru->tempat_lahir }}">
             <small class="form-text text-danger" id="tempat_lahirErr"></small>
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
             <label for="">Tanggal Lahir</label>
-            <input type="text" class="form-control" name="tanggal_lahir" value="{{ $guru->email }}">
+            <input type="date" class="form-control" name="tanggal_lahir" value="{{ $guru->tanggal_lahir }}">
             <small class="form-text text-danger" id="tanggal_lahirErr"></small>
         </div>
     </div>

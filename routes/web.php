@@ -14,9 +14,7 @@
 
 
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+
 
 
 
@@ -26,6 +24,10 @@ Route::post('/login', 'AuthController@postlogin')->name('auth.postlogin');
 Route::post('/register', 'AuthController@postlogin')->name('auth.postlogin');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', function () {
+        return view('home');
+    })->name('home');
+
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
     Route::prefix('siswa')->group(function () {
         Route::get('/', 'SiswaController@index')->name('siswa.index');
@@ -36,9 +38,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::prefix('guru')->group(function () {
         Route::get('/', 'GuruController@index')->name('guru.index');
-        Route::post('/', 'GuruController@addSiswa')->name('guru.addGuru');
-        Route::get('/{id}/edit', 'GuruController@editSiswa')->name('guru.editGuru');
-        Route::patch('/{id}', 'GuruController@updateSiswa')->name('guru.updateGuru');
-        Route::delete('/{id}', 'GuruController@deleteSiswa')->name('guru.deleteGuru');
+        Route::post('/', 'GuruController@addGuru')->name('guru.addGuru');
+        Route::get('/{id}/edit', 'GuruController@editGuru')->name('guru.editGuru');
+        Route::patch('/{id}', 'GuruController@updateGuru')->name('guru.updateGuru');
+        Route::delete('/{id}', 'GuruController@deleteGuru')->name('guru.deleteGuru');
     });
 });

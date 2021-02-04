@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\GuruModel;
+use App\User;
 use App\Http\Requests\GuruRequest;
 use App\Http\Requests\GuruEditRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class GuruController extends Controller
 {
@@ -19,7 +21,7 @@ class GuruController extends Controller
     {
         $photo = request('photo');
         $photo_new = time() . '-' . uniqid() . '.' .  $photo->extension();
-        
+
         GuruModel::create([
             'nama'       => request('nama'),
             'email'    => request('email'),
@@ -30,6 +32,16 @@ class GuruController extends Controller
             'photo'            => $photo_new,
             'handphone'            => request('handphone'),
             'alamat'           => request('alamat'),
+        ]);
+
+        User::create([
+            'name' => request('nama'),
+            'role' => 'guru',
+            'email' => request('email'),
+            'photo' => 'default.png',
+            'email_verified_at' => '2021-01-21 19:53:09',
+            'password' => bcrypt('rahasia123'),
+            'remember_token'   => Str::random(60)
         ]);
         $photo->move('uploads/guru/', $photo_new);
     }
@@ -44,10 +56,10 @@ class GuruController extends Controller
 
     function updateGuru(GuruEditRequest $request, $id)
     {
-        if(request('photo') !== null){
+        if (request('photo') !== null) {
             $photo = request('photo');
             $photo_new = time() . '-' . uniqid() . '.' .  $photo->extension();
-            
+
             $data_guru = [
                 'nama'       => request('nama'),
                 'email'    => request('email'),
@@ -61,7 +73,7 @@ class GuruController extends Controller
             ];
 
             $photo->move('uploads/guru/', $photo_new);
-        }else{
+        } else {
             $data_guru = [
                 'nama'       => request('nama'),
                 'email'    => request('email'),

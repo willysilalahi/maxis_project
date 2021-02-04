@@ -29,6 +29,8 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('home');
 
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
+    Route::get('/profil', 'DashboardController@profil')->name('dashboard.profil');
+    Route::get('/profil/{id}', 'DashboardController@profilEdit')->name('dashboard.profil.edit');
     Route::prefix('siswa')->group(function () {
         Route::get('/', 'SiswaController@index')->name('siswa.index');
         Route::post('/', 'SiswaController@addSiswa')->name('siswa.addSiswa');

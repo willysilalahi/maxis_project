@@ -10,6 +10,8 @@
             <li class="menu-header">Dashboard</li>
             <li class="active"><a class="nav-link" href="{{ route('dashboard.index') }}"><i class="far fa-square"></i>
                     <span>Dashboard</span></a></li>
+            <li class="active"><a class="nav-link" href="{{ route('dashboard.profil') }}"><i class="far fa-user"></i>
+                    <span>Profil</span></a></li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Siswa</span></a>
                 <ul class="dropdown-menu">
